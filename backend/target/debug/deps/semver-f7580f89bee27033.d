@@ -1,0 +1,11 @@
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\semver-f7580f89bee27033.d: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\display.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\error.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\eval.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\identifier.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\impls.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\parse.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\libsemver-f7580f89bee27033.rmeta: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\display.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\error.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\eval.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\identifier.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\impls.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\parse.rs
+
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\lib.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\display.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\error.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\eval.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\identifier.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\impls.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\semver-1.0.28\src\parse.rs:

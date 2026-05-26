@@ -1,0 +1,7 @@
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\rustc_version-a8751bcd8440270d.d: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc_version-0.4.1\src\lib.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\librustc_version-a8751bcd8440270d.rlib: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc_version-0.4.1\src\lib.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\librustc_version-a8751bcd8440270d.rmeta: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc_version-0.4.1\src\lib.rs
+
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\rustc_version-0.4.1\src\lib.rs:

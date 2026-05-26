@@ -1,0 +1,21 @@
+id: git.commit-assistant
+name: Commit Assistant
+version: 1.0.0
+description: Ajuda a revisar alteracoes e sugerir mensagens de commit.
+category: git
+author: LyaCode
+permissions:
+  filesystem: read
+  shell: deny
+  network: deny
+triggers:
+  - commit
+  - git diff
+  - staged files
+inputs:
+  - git_status
+  - git_diff
+outputs:
+  - markdown
+  - command_suggestion
+

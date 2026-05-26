@@ -1,0 +1,9 @@
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\derive_more-2c6a0dfff4c6798a.d: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\add.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\ops.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\libderive_more-2c6a0dfff4c6798a.rlib: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\add.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\ops.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\libderive_more-2c6a0dfff4c6798a.rmeta: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\add.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\ops.rs
+
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\lib.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\add.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\derive_more-2.1.1\src\ops.rs:

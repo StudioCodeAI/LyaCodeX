@@ -1,0 +1,11 @@
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\bitflags-cb50b0497eecadb9.d: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\iter.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\parser.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\traits.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\public.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\internal.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\external.rs
+
+E:\GitHub\LyaCode\LyaCodex-II\backend\target\debug\deps\libbitflags-cb50b0497eecadb9.rmeta: C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\lib.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\iter.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\parser.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\traits.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\public.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\internal.rs C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\external.rs
+
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\lib.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\iter.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\parser.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\traits.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\public.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\internal.rs:
+C:\Users\LuisCard\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\bitflags-2.11.1\src\external.rs:
