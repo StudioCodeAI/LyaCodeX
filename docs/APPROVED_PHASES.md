@@ -1,108 +1,46 @@
-# Approved Phases — LyaCodex II
+# Approved Phases — LyaCodeX
 
-## Fase 0 — Constituicao
+> Nome oficial: LyaCodeX
+> Pasta: E:\GitHub\LyaCodeX
 
-Status: documentada.
+## Fase 0 — Constituição ✅
+Arquitetura, regras de IA, segurança, roadmap, skill spec.
 
-Entregas:
+## Fase 1 — Núcleo seguro ✅
+Contratos compartilhados, keyRef, provider descriptors, model descriptors, security policy, runtime orchestrator, audit event. Keychain via Windows Credential Manager (crate keyring). keyRef nunca exposto no frontend.
 
-- arquitetura;
-- regras de IA;
-- seguranca;
-- roadmap;
-- skill spec.
+## Fase 2 — Settings e Providers ✅ (parcial)
+ProviderSettingsPanel, geração de keyRef, teste de provider, seletor de modelos, privacyMode. **Pendente:** teste real de provider via Tauri, shell manager.
 
-## Fase 1 — Nucleo seguro
+## Fase 3 — Workspace Engine ✅ (parcial)
+scan_workspace, read_workspace_file, proteção anti path traversal, arquivos sensíveis bloqueados, diretórios ignorados. **Pendente:** WorkspacePanel UI, git status, git diff, patch viewer.
 
-Status: em implementacao.
+## Fase 4 — Agent Runtime ⏳
+ApprovalRequest, classificação Safe/Ask/Danger, planner, command runner, verifier, rollback, logs reais.
 
-Entregas iniciais criadas:
+## Fase 5 — Skills Engine ✅ (parcial)
+SkillCatalogPanel com seletor PT-BR/EN, 11 categorias automáticas, busca local, até 5 skills ativas simultâneas, risco badge, skill_catalog.rs no backend, integração com sickn33/antigravity-awesome-skills. **Pendente:** injeção das skills ativas no system prompt do RuntimeChatPanel.
 
-- contratos compartilhados;
-- `keyRef`;
-- provider descriptors;
-- model descriptors;
-- security policy;
-- runtime orchestrator;
-- audit event.
+## Fase 6 — Memory Engine ⏳
+SQLite local, resumo de sessão, memória do projeto, histórico de comandos, preferências.
 
-## Fase 2 — Settings e Providers
+## Fase 7 — Produto final ⏳
+README final, screenshots, instalador, auto-update, documentação pública.
 
-Status: em implementacao inicial.
+## Fase 8 — First Run, Local Engine e Temas ✅ (parcial)
+FirstRunWakePanel, LocalEnginePanel com detecção real de Ollama/LM Studio no browser, ThemeTokens documentados (Deep Dark, Glass Dev, Classic Terminal), hardware detection via browser APIs (cores, RAM, GPU WebGL). **Pendente:** theme switcher na UI, animação de sopro.
 
-Entregas iniciais criadas:
+## Fase 9 — RuntimeChatPanel ✅
+RuntimeChatPanel.tsx, splash screen, streaming collect, histórico de mensagens, estados streaming/done/error, wake ritual, privacy guard, keyRef guard.
 
-- `ProviderSettingsPanel`;
-- geracao de `keyRef`;
-- teste de provider por callback;
-- capacidades de provider expostas na UI.
+## Fase 10 — Shell Native Presence ✅ (parcial)
+CLI via Clap com 10 subcomandos (wake, status, models, engines, keychain, skills, chat, aliases, info, --version). Aliases: lyacodex, lcx, lya (+ variações case-insensitive via batch wrappers). **Pendente:** registro automático no PATH via NSIS/MSI, integração com PowerShell profile.
 
-## Fase 3 — Workspace Engine
+## Fase 11 — Hybrid Intelligence Mode ✅ (parcial)
+HybridModePanel com 4 modos (local/cloud/hybrid/auto), 4 modos de privacidade, hardware detectado exibido, fluxo visual do Hybrid, regras explicadas do Auto. **Pendente:** escalada automática sugerida pela Lya com aprovação inline no chat.
 
-Status: base de politica criada.
+## Fase 12 — Hardware Detection ⏳
+Detecção de RAM via crate sysinfo, GPU/VRAM, perfis de recomendação, sugestão de motor local compatível. Detectado parcialmente no browser (deviceMemory + WebGL).
 
-Entregas iniciais:
-
-- ignorar `.git`, `node_modules`, `target`, `dist`, `build`;
-- detectar arquivos sensiveis;
-- bloquear envio automatico de arquivos sensiveis para cloud.
-
-## Fase 4 — Agent Runtime
-
-Status: contrato inicial criado.
-
-Entregas:
-
-- `ApprovalRequest`;
-- classificacao safe, ask, danger;
-- helper para saber quando pedir aprovacao.
-
-## Fase 5 — Skills Engine
-
-Status: manifestos e validacao minima criados.
-
-Entregas:
-
-- `SkillManifest`;
-- `validateSkillManifest`;
-- exemplo oficial `git.commit-assistant`.
-
-## Fase 6 — Memory Engine
-
-Status: contrato inicial criado.
-
-Entregas:
-
-- `MemoryEvent`;
-- categorias iniciais de memoria.
-
-## Fase 7 — Produto final
-
-Status: pendente.
-
-Depende das fases 1 a 6 funcionando com UI e backend real.
-
-## Fase 8 — First Run, OpenAI GPT Local e Temas
-
-Status: documentada no projeto e parcialmente representada pelos contratos.
-
-## Fase 9 — RuntimeChatPanel
-
-Status: criado em `frontend/src/components/RuntimeChatPanel.tsx`.
-
-## Fase 10 — Shell Native Presence
-
-Status: documentada, implementacao pendente.
-
-## Fase 11 — Hybrid Intelligence Mode
-
-Status: painel inicial criado em `HybridModePanel`.
-
-## Fase 12 — Hardware Detection
-
-Status: pendente.
-
-## Fase 13 — Tool Providers e Web Research
-
-Status: documentada, implementacao pendente.
-
+## Fase 13 — Tool Providers e Web Research ⏳
+Tavily Search, Brave Search, Web Fetch, GitHub integration, sistema de permissões por ferramenta.

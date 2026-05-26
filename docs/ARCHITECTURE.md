@@ -1,127 +1,54 @@
-# LyaCodex II Architecture
+# Architecture — LyaCodeX
 
-> Arquitetura oficial do motor LyaCodex II.
+> Arquitetura oficial do LyaCodeX — agente de terminal com IA para programadores.
+> Se você pensa, você executa. Se você executa, você indexa. Se você indexa, você evolui.
 
 ## 1. Propósito
 
-O LyaCodex II é o motor responsável por transformar o LyaCode Studio em um ambiente de engenharia assistido por IA, local-first, multi-modelo, seguro e extensível por skills.
+O LyaCodeX é um agente de terminal instalável via `lyacodex`, `lcx` ou `lya` em qualquer terminal (VS Code, PowerShell, Windows Terminal). Ajuda programadores a escrever, revisar, depurar e entender código com suporte a modelos locais e cloud.
 
 ## 2. Princípio central
 
-> A IA pensa e propõe. O LyaCode controla, executa, audita e protege.
+> A IA pensa e propõe. O LyaCodeX controla, executa, audita e protege.
 
 ## 3. Camadas
 
 ```text
-LyaCode Studio UI
+LyaCodeX UI (React 19 + TypeScript)
   ↓
-Tauri Commands Boundary
+Tauri Commands Boundary (IPC seguro)
   ↓
-LyaCodex II Core
-  ├── Keychain
-  ├── Model Gateway
-  ├── Workspace Engine
-  ├── Skill Engine
-  ├── Agent Runtime
-  ├── Memory Engine
-  ├── Security Policy
-  └── Event Log
+LyaCodeX Backend (Rust — lyacodex_backend)
+  ├── Keychain          (Windows Credential Manager)
+  ├── Model Gateway     (Ollama, LM Studio, OpenRouter, OpenAI, Gemini, Anthropic, Groq)
+  ├── Workspace Engine  (scan, read, patch — com proteção anti traversal)
+  ├── Skill Engine      (sickn33/antigravity-awesome-skills, 1200+ skills)
+  ├── Agent Runtime     (plan → approve → execute → verify)
+  ├── Memory Engine     (SQLite — pendente)
+  ├── Security Policy   (Safe / Ask / Danger)
+  └── Event Log         (auditável, sem vazar secrets)
 ```
 
-## 4. Responsabilidades
+## 4. Stack técnica
 
-### UI React
+| Camada | Tecnologia |
+|--------|-----------|
+| Core | Rust + Tauri 2 |
+| Frontend | React 19 + TypeScript + Vite |
+| Terminal | xterm.js + portable-pty |
+| Keychain | crate `keyring` (Windows Credential Manager) |
+| Skills | GitHub raw + SKILL.md frontmatter YAML |
+| CLI | Clap 4 com subcomandos |
+| Aliases | `lyacodex`, `lcx`, `lya` |
 
-A UI deve cuidar de:
+## 5. Regras de ouro
 
-- renderização;
-- input do usuário;
-- terminal visual;
-- chat visual;
-- paleta de comandos;
-- painéis de configuração;
-- diff viewer;
-- confirmação de ações.
-
-A UI não deve:
-
-- armazenar API keys reais;
-- decidir política de segurança;
-- executar comandos perigosos diretamente;
-- montar regras complexas de providers;
-- enviar arquivos sensíveis para nuvem sem autorização.
-
-### Rust Core
-
-O backend Rust deve cuidar de:
-
-- pseudo-terminal;
-- cofre de chaves;
-- chamadas de modelos;
-- roteamento de provedores;
-- workspace;
-- skills;
-- memória;
-- execução de ações;
-- logs auditáveis;
-- políticas de segurança.
-
-## 5. Módulos do Core
-
-### Keychain
-
-Salva e recupera segredos usando referência segura.
-
-A UI usa:
-
-```text
-secret://provider/openrouter/default
-```
-
-O Rust resolve a chave real.
-
-### Model Gateway
-
-Interface única para modelos locais e online.
-
-Métodos desejados:
-
-```text
-list_models(provider)
-test_connection(provider, key_ref)
-chat(request)
-stream_chat(request)
-```
-
-### Workspace Engine
-
-Responsável por abrir, ler e alterar projetos.
-
-Tudo que escreve arquivo deve passar por autorização.
-
-### Skill Engine
-
-Carrega skills, valida manifestos, aplica ranking e injeta apenas skills relevantes no contexto.
-
-### Agent Runtime
-
-Converte pedidos em planos, ações, patches e comandos, sempre respeitando a política de aprovação.
-
-### Memory Engine
-
-Guarda memória de sessão, projeto, decisões técnicas e preferências do usuário.
-
-### Security Policy
-
-Classifica ações em:
-
-- Safe
-- Ask
-- Danger
-
-### Event Log
-
-Registra ações importantes sem vazar segredos.
+1. API key real nunca fica no frontend — apenas `keyRef` (ex: `secret://provider/openai/default`)
+2. IA nunca executa comando destrutivo sem aprovação explícita do usuário
+3. Skills são módulos com manifesto — não prompts soltos
+4. O terminal permanece confiável acima de qualquer feature de IA
+5. Toda ação do agente é auditável
+6. O usuário sempre pode cancelar, editar ou negar uma ação
 
 ## 6. Fluxo de agente
 
@@ -130,28 +57,24 @@ User Request
   ↓
 Intent Detection
   ↓
-Workspace Context
+Workspace Context + Skills ativas (até 5)
   ↓
-Skill Selection
-  ↓
-Model Routing
+Model Routing (local → cloud conforme modo)
   ↓
 Plan Generation
   ↓
-User Approval
+User Approval (Safe / Ask / Danger)
   ↓
 Execution
   ↓
-Verification
-  ↓
-Memory Update
+Verification + Memory Update
 ```
 
-## 7. Regras de ouro
+## 7. Modos de runtime
 
-1. API key real nunca fica no frontend.
-2. IA nunca executa comando destrutivo sem aprovação.
-3. Skills não são prompts soltos; são módulos com manifesto.
-4. O terminal deve permanecer confiável acima de qualquer feature de IA.
-5. Toda ação do agente deve ser auditável.
-6. O usuário sempre deve poder cancelar, editar ou negar uma ação.
+| Modo | Comportamento |
+|------|--------------|
+| `local` | Sempre usa motor local (Ollama / LM Studio) |
+| `cloud` | Sempre usa provider cloud com API key |
+| `hybrid` | Começa local, avisa e pede aprovação para escalar |
+| `auto` | Decide por complexidade, contexto, hardware e privacidade |

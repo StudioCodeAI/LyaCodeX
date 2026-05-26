@@ -1,24 +1,27 @@
 param(
-  [string]$InstallDir = "$env:LOCALAPPDATA\LyaCodex-II",
+  [string]$InstallDir   = "$env:LOCALAPPDATA\LyaCodeX",
   [switch]$BuildFromSource,
-  [switch]$Launch
+  [switch]$Launch,
+  [switch]$SkipAliases
 )
 
 $ErrorActionPreference = "Stop"
+$ScriptDir   = Split-Path -Parent $MyInvocation.MyCommand.Path
+$ProjectRoot = Resolve-Path (Join-Path $ScriptDir "..")
 
-function Write-Step {
-  param([string]$Message)
-  Write-Host "[LyaCodex II] $Message"
+function Write-Step([string]$msg) {
+  Write-Host "  [LyaCodeX] $msg" -ForegroundColor Cyan
 }
 
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$ProjectRoot = Resolve-Path (Join-Path $ScriptDir "..")
-$InstallerRoot = Join-Path $ProjectRoot "src-tauri\target\release\bundle"
+Write-Host ""
+Write-Host "  LyaCodeX — Instalador principal" -ForegroundColor Green
+Write-Host "  Se você pensa, você executa." -ForegroundColor DarkGreen
+Write-Host ""
+Write-Step "Projeto: $ProjectRoot"
 
-Write-Step "Project root: $ProjectRoot"
-
+# ── Build opcional ───────────────────────────────────────────────
 if ($BuildFromSource) {
-  Write-Step "Building desktop installer from source."
+  Write-Step "Compilando a partir do código-fonte..."
   Push-Location $ProjectRoot
   try {
     npm install
@@ -28,59 +31,71 @@ if ($BuildFromSource) {
   }
 }
 
-$NsisInstaller = Get-ChildItem -LiteralPath $InstallerRoot -Recurse -Filter "*.exe" -ErrorAction SilentlyContinue |
+# ── Localizar instalador gerado pelo Tauri ───────────────────────
+$BundleRoot = Join-Path $ProjectRoot "src-tauri\target\release\bundle"
+
+$NsisInstaller = Get-ChildItem -LiteralPath $BundleRoot -Recurse -Filter "*.exe" -ErrorAction SilentlyContinue |
   Where-Object { $_.FullName -match "\\nsis\\" } |
   Sort-Object LastWriteTime -Descending |
   Select-Object -First 1
 
-$MsiInstaller = Get-ChildItem -LiteralPath $InstallerRoot -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue |
+$MsiInstaller = Get-ChildItem -LiteralPath $BundleRoot -Recurse -Filter "*.msi" -ErrorAction SilentlyContinue |
   Sort-Object LastWriteTime -Descending |
   Select-Object -First 1
 
 if ($NsisInstaller) {
-  Write-Step "Running NSIS installer: $($NsisInstaller.FullName)"
+  Write-Step "Instalador NSIS encontrado: $($NsisInstaller.FullName)"
   Start-Process -FilePath $NsisInstaller.FullName -Wait
 } elseif ($MsiInstaller) {
-  Write-Step "Running MSI installer: $($MsiInstaller.FullName)"
+  Write-Step "Instalador MSI encontrado: $($MsiInstaller.FullName)"
   Start-Process -FilePath "msiexec.exe" -ArgumentList "/i", $MsiInstaller.FullName -Wait
 } else {
-  Write-Step "No desktop installer was found. Installing portable release binary."
-  $ReleaseExe = Join-Path $ProjectRoot "src-tauri\target\release\lyacodex_ii_desktop.exe"
+  # Instalação portable
+  Write-Step "Nenhum instalador Tauri encontrado. Instalando modo portable..."
 
-  if (!(Test-Path -LiteralPath $ReleaseExe)) {
-    Write-Step "Release binary not found. Building it now."
-    Push-Location (Join-Path $ProjectRoot "src-tauri")
-    try {
-      cargo build --release
-    } finally {
-      Pop-Location
-    }
+  $candidates = @(
+    (Join-Path $ProjectRoot "src-tauri\target\release\lyacodex.exe"),
+    (Join-Path $ProjectRoot "src-tauri\target\release\lyacodex_desktop.exe")
+  )
+  $ReleaseExe = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+  if (!$ReleaseExe) {
+    Write-Step "Compilando binário release..."
+    Push-Location $ProjectRoot
+    try { npm run tauri -- build } finally { Pop-Location }
+    $ReleaseExe = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
   }
 
-  if (!(Test-Path -LiteralPath $ReleaseExe)) {
-    throw "Could not find or build lyacodex_ii_desktop.exe."
+  if (!$ReleaseExe) {
+    throw "Não foi possível localizar ou compilar lyacodex.exe."
   }
 
   New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-  Copy-Item -LiteralPath $ReleaseExe -Destination (Join-Path $InstallDir "LyaCodex-II.exe") -Force
-
-  $ShortcutPath = Join-Path ([Environment]::GetFolderPath("Desktop")) "LyaCodex II.lnk"
-  $Shell = New-Object -ComObject WScript.Shell
-  $Shortcut = $Shell.CreateShortcut($ShortcutPath)
-  $Shortcut.TargetPath = Join-Path $InstallDir "LyaCodex-II.exe"
-  $Shortcut.WorkingDirectory = $InstallDir
-  $Shortcut.Description = "LyaCodex II Runtime"
-  $Shortcut.Save()
-
-  Write-Step "Portable install completed at $InstallDir"
+  Copy-Item -LiteralPath $ReleaseExe -Destination (Join-Path $InstallDir "lyacodex.exe") -Force
+  Write-Step "Portable instalado em: $InstallDir"
 }
 
-if ($Launch) {
-  $InstalledExe = Join-Path $InstallDir "LyaCodex-II.exe"
-  if (Test-Path -LiteralPath $InstalledExe) {
-    Write-Step "Launching LyaCodex II."
-    Start-Process -FilePath $InstalledExe
+# ── Instalar aliases ─────────────────────────────────────────────
+if (!$SkipAliases) {
+  Write-Step "Configurando aliases no terminal..."
+  $aliasScript = Join-Path $ScriptDir "install-aliases.ps1"
+  if (Test-Path $aliasScript) {
+    & $aliasScript -InstallDir $InstallDir -NoConfirm
+  } else {
+    Write-Step "⚠️  install-aliases.ps1 não encontrado. Rode manualmente para criar aliases."
   }
 }
 
-Write-Step "Done."
+# ── Abrir após instalação ─────────────────────────────────────────
+if ($Launch) {
+  $exe = Join-Path $InstallDir "lyacodex.exe"
+  if (Test-Path $exe) {
+    Write-Step "Iniciando LyaCodeX..."
+    Start-Process -FilePath $exe
+  }
+}
+
+Write-Host ""
+Write-Host "  ✅ Instalação concluída!" -ForegroundColor Green
+Write-Host "  Abra um novo terminal e use: lya, lcx ou lyacodex" -ForegroundColor Cyan
+Write-Host ""

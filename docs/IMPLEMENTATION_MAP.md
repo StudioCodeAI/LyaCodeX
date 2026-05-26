@@ -1,109 +1,71 @@
-# Implementation Map — LyaCodex II
+# Implementation Map — LyaCodeX
 
-## Regra de escopo
+> Nome oficial: LyaCodeX
+> Pasta: E:\GitHub\LyaCodeX
 
-Tudo nesta etapa foi criado dentro de `LyaCodex-II`.
-
-O app principal em `src` e `src-tauri` continua como referencia e nao foi substituido por esta estrutura.
-
-## Estrutura criada
+## Estrutura do projeto
 
 ```text
-LyaCodex-II
-├── index.html
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-├── shared
-│   ├── contracts.ts
+E:\GitHub\LyaCodeX\
+├── package.json              (@lyacodex/lyacodex)
+├── PLANO_EM_DISCUSSÃO.md     (fonte de verdade do projeto)
+├── README.md
+├── shared\
+│   ├── contracts.ts          (tipos compartilhados: providers, runtime, skills)
 │   └── index.ts
-├── engine
-│   ├── README.md
-│   └── src
-│       ├── agent
-│       ├── keychain
-│       ├── memory
-│       ├── model-gateway
-│       ├── runtime
-│       ├── security
-│       ├── skills
-│       └── workspace
-├── frontend
-│   └── src
-│       ├── components
-│       └── runtime
-├── backend
-│   ├── Cargo.toml
-│   └── src
-│       ├── commands.rs
-│       ├── contracts.rs
-│       ├── keychain.rs
-│       ├── providers.rs
-│       ├── security.rs
-│       ├── transport.rs
-│       └── workspace.rs
-├── src-tauri
-│   ├── Cargo.toml
-│   ├── tauri.conf.json
-│   └── src
-│       ├── lib.rs
-│       └── main.rs
-└── examples
-    ├── prompts
-    └── skills
+├── engine\src\
+│   ├── keychain\keyRef.ts    (geração de keyRef seguro)
+│   ├── model-gateway\
+│   │   └── providers.ts      (LYA_PROVIDERS — sem lyacodex-trial)
+│   └── ...
+├── frontend\src\
+│   ├── App.tsx
+│   ├── components\
+│   │   ├── RuntimeChatPanel.tsx      ✅
+│   │   ├── ProviderSettingsPanel.tsx ✅
+│   │   ├── HybridModePanel.tsx       ✅ (lógica Auto/Hybrid real)
+│   │   ├── SkillCatalogPanel.tsx     ✅ (PT-BR/EN, 11 categorias, 5 skills)
+│   │   ├── LocalEnginePanel.tsx      ✅
+│   │   ├── FirstRunWakePanel.tsx     ✅
+│   │   └── WorkspacePanel.tsx        ⏳ (pendente)
+│   ├── runtime\
+│   │   ├── environment.ts            ✅ (isTauri + hardware detection)
+│   │   ├── localEngineClient.ts      ✅ (detecta Ollama/LM Studio no browser)
+│   │   ├── browserProviderGateway.ts ✅ (cloud com keyRef, local direto)
+│   │   ├── skillCatalogClient.ts     ✅
+│   │   ├── keychainClient.ts         ✅
+│   │   └── tauriBackendClient.ts     ✅
+│   └── state\
+│       └── settingsStore.ts          ✅ (activeSkills[], customBaseUrls, migração v1→v2)
+├── backend\
+│   ├── Cargo.toml                    (lyacodex_backend)
+│   └── src\
+│       ├── lib.rs                    ✅
+│       ├── commands.rs               ✅
+│       ├── contracts.rs              ✅
+│       ├── keychain.rs               ✅ (Windows Credential Manager)
+│       ├── providers.rs              ✅ (sem trial)
+│       ├── transport.rs              ✅ (stream: false — streaming pendente)
+│       ├── workspace.rs              ✅ (anti traversal)
+│       ├── local_engine.rs           ✅
+│       ├── skill_catalog.rs          ✅
+│       └── security.rs               ✅
+├── src-tauri\
+│   ├── Cargo.toml                    (lyacodex_desktop, dep: lyacodex_backend)
+│   ├── tauri.conf.json               (productName: LyaCodeX)
+│   ├── capabilities\default.json     ✅ (IPC permissions corretas)
+│   └── src\
+│       ├── lib.rs                    ✅ (usa lyacodex_backend, 14 handlers)
+│       └── main.rs                   ✅ (Clap CLI, 10 subcomandos, banner ASCII)
+└── scripts\
+    ├── install-aliases.ps1           ✅ (lyacodex, lcx, lya + batch wrappers)
+    └── install-lyacodex-ii.ps1       ✅ (instalador principal)
 ```
 
-## Nucleo implementado
+## Pendente prioritário
 
-### Shared contracts
-
-Define os contratos entre UI, runtime e engine:
-
-- providers;
-- modelos;
-- runtime request;
-- action intent;
-- approval request;
-- audit event.
-
-### Engine
-
-Implementa a primeira versao de:
-
-- keyRef;
-- provider registry;
-- model registry;
-- politica de privacidade;
-- classificacao de risco;
-- orquestrador de runtime;
-- auditoria;
-- politica de workspace;
-- manifesto de skills;
-- eventos de memoria.
-
-### Frontend
-
-Implementa paineis iniciais:
-
-- `RuntimeChatPanel`;
-- `ProviderSettingsPanel`;
-- `HybridModePanel`.
-- `BrowserProviderGateway` para testar providers locais OpenAI-compatible.
-
-## Persistencia atual
-
-O app persiste somente:
-
-- provider selecionado;
-- modelo selecionado;
-- runtime mode;
-- privacy mode;
-- `keyRef` metadata.
-
-Nao persiste API key real no frontend.
-
-## Proximo bloco recomendado
-
-1. Conectar Workspace Engine ao Agent Runtime.
-2. Criar Patch Viewer.
-3. Criar command runner com aprovacao.
+1. **Skills no prompt** — injetar `activeSkills[].content` no system prompt do RuntimeChatPanel
+2. **Streaming real** — `transport.rs` com `stream: true` + `app_handle.emit()` por chunk
+3. **Hardware detection Tauri** — crate `sysinfo` no backend Rust
+4. **Theme switcher** — ThemeManager.tsx com os 3 temas e persistência
+5. **Chat direto CLI** — `lyacodex chat` com resposta real via backend

@@ -1,239 +1,88 @@
-<<<<<<< HEAD
-# LyaCodex
+# LyaCodeX
 
-> **LyaCodex** é a fundação técnica da próxima geração do LyaCode.
-Enquanto for projeto, será identificado por LyaCodex II, simbolizando a continuidade do LyaCode e posterior trazendo somente o "X" da versão melhorada.
-
-Esta pasta nasce para organizar a evolução do projeto com arquitetura sólida, segurança, IA local/online, skills modulares, memória controlada e execução assistida por aprovação.
+> **LyaCodeX** e o agente de terminal com IA para programadores.
+> Se voce pensa, voce executa. Se voce executa, voce indexa. Se voce indexa, voce evolui.
 
 ---
 
-## Missão
+## Missao
 
-Transformar o LyaCodex em um terminal de engenharia com IA que seja:
+Transformar o LyaCodeX em um terminal de engenharia com IA que seja:
 
-- **liso**: rápido, estável, sem travar input ou quebrar fluxo de terminal;
-- **seguro**: chaves protegidas, ações perigosas com aprovação, logs sem segredos;
-- **local-first**: capaz de usar Ollama, LM Studio, vLLM e outros motores locais;
-- **multi-modelo**: compatível com OpenRouter, OpenAI, Gemini, Anthropic, Groq e endpoints OpenAI-compatible;
-- **orientado por skills**: skills com manifesto, permissões, prompts e ativação por relevância;
-- **útil para código real**: abrir projetos, ler arquivos, revisar diffs, rodar testes e propor patches;
-- **controlado pelo usuário**: a IA propõe, o LyaCode executa somente com permissão.
-
----
-
-## Princípio central
-
-> **A IA pensa e propõe. O LyaCodex controla, executa, audita e protege simples assim.**
+- **liso**: rapido, estavel, sem travar input ou quebrar fluxo de terminal
+- **seguro**: chaves protegidas, acoes perigosas com aprovacao, logs sem segredos
+- **local-first**: capaz de usar Ollama, LM Studio e outros motores locais
+- **multi-modelo**: compativel com OpenRouter, OpenAI, Gemini, Anthropic, Groq
+- **orientado por skills**: skills com manifesto, permissoes, prompts e ativacao por relevancia
+- **util para codigo real**: abrir projetos, ler arquivos, revisar diffs, rodar testes e propor patches
+- **controlado pelo usuario**: a IA propoe, o LyaCodeX executa somente com permissao
 
 ---
 
-## Como esta pasta deve ser usada
+## Principio central
 
-Esta pasta será o centro de planejamento e implementação gradual do novo motor.
-
-Ela não deve virar um segundo projeto bagunçado. Toda mudança deve seguir:
-
-1. plano claro;
-2. arquivo certo;
-3. implementação pequena;
-4. teste possível;
-5. rollback simples;
-6. documentação atualizada.
+> A IA pensa e propoe. O LyaCodeX controla, executa, audita e protege.
 
 ---
 
-## Estrutura inicial
+## Stack tecnica
 
-```text
-LyaCodex-II/
-├── README.md
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── AI_RULES.md
-│   ├── ROADMAP.md
-│   ├── SECURITY.md
-│   └── SKILL_SPEC.md
-├── engine/
-│   ├── README.md
-│   ├── keychain/
-│   ├── models/
-│   ├── workspace/
-│   ├── skills/
-│   ├── agent/
-│   └── memory/
-└── examples/
-    ├── skills/
-    └── prompts/
-=======
-# LyaCodex
-
-> **LyaCodex** é a fundação técnica da próxima geração do LyaCode.
-Enquanto for projeto, será identificado por LyaCodex II, simbolizando a continuidade do LyaCode e posterior trazendo somente o "X" da versão melhorada.
-
-Esta pasta nasce para organizar a evolução do projeto com arquitetura sólida, segurança, IA local/online, skills modulares, memória controlada e execução assistida por aprovação.
+| Camada | Tecnologia |
+|--------|-----------|
+| Core | Rust + Tauri 2 |
+| Frontend | React 19 + TypeScript + Vite |
+| Terminal | xterm.js + portable-pty |
+| Keychain | Windows Credential Manager (crate keyring) |
+| Skills | sickn33/antigravity-awesome-skills (1200+ skills) |
+| CLI | Clap 4 |
+| Aliases | lyacodex, lcx, lya |
 
 ---
 
-## Missão
+## Estrutura do projeto
 
-Transformar o LyaCodex em um terminal de engenharia com IA que seja:
-
-- **liso**: rápido, estável, sem travar input ou quebrar fluxo de terminal;
-- **seguro**: chaves protegidas, ações perigosas com aprovação, logs sem segredos;
-- **local-first**: capaz de usar Ollama, LM Studio, vLLM e outros motores locais;
-- **multi-modelo**: compatível com OpenRouter, OpenAI, Gemini, Anthropic, Groq e endpoints OpenAI-compatible;
-- **orientado por skills**: skills com manifesto, permissões, prompts e ativação por relevância;
-- **útil para código real**: abrir projetos, ler arquivos, revisar diffs, rodar testes e propor patches;
-- **controlado pelo usuário**: a IA propõe, o LyaCode executa somente com permissão.
-
----
-
-## Princípio central
-
-> **A IA pensa e propõe. O LyaCodex controla, executa, audita e protege simples assim.**
-
----
-
-## Como esta pasta deve ser usada
-
-Esta pasta será o centro de planejamento e implementação gradual do novo motor.
-
-Ela não deve virar um segundo projeto bagunçado. Toda mudança deve seguir:
-
-1. plano claro;
-2. arquivo certo;
-3. implementação pequena;
-4. teste possível;
-5. rollback simples;
-6. documentação atualizada.
-
----
-
-## Estrutura inicial
-
-```text
-LyaCodex-II/
-├── README.md
-├── docs/
-│   ├── ARCHITECTURE.md
-│   ├── AI_RULES.md
-│   ├── ROADMAP.md
-│   ├── SECURITY.md
-│   └── SKILL_SPEC.md
-├── engine/
-│   ├── README.md
-│   ├── keychain/
-│   ├── models/
-│   ├── workspace/
-│   ├── skills/
-│   ├── agent/
-│   └── memory/
-└── examples/
-    ├── skills/
-    └── prompts/
->>>>>>> 106f831 (Descrição das mudanças)
+```
+LyaCodeX/
+├── shared/         contratos entre UI, engine e runtime
+├── engine/         keyRef, providers, security, runtime, agent, skills
+├── frontend/       paineis React: Chat, Skills, Providers, Hybrid, Local
+├── backend/        Rust: keychain, transport, workspace, skill_catalog
+├── src-tauri/      Tauri desktop: lib.rs, main.rs (CLI Clap)
+├── scripts/        install-aliases.ps1, git-sync.ps1
+└── docs/           ARCHITECTURE, AI_RULES, ROADMAP, APPROVED_PHASES
 ```
 
-## Estrutura de implementacao criada
+---
 
-O projeto agora tambem possui uma base executavel em TypeScript dentro desta pasta:
+## Aliases no terminal
 
-```text
-LyaCodex-II/
-├── shared/       # contratos entre UI, engine e runtime
-├── engine/       # keyRef, providers, security, runtime, agent, skills, memory
-├── frontend/     # paineis novos do LyaCodex II
-└── examples/     # skills e prompts oficiais iniciais
+```
+lyacodex          abre a interface desktop
+lcx               atalho curto
+lya               atalho mais curto
+lyacodex wake     ritual de inicio
+lyacodex status   status do runtime
+lyacodex skills   catalogo de skills
+lyacodex aliases  lista todos os aliases
 ```
 
-Validacao local:
+---
 
-```text
-npm run typecheck
+## Instalacao
+
+```powershell
+cd E:\GitHub\LyaCodeX
+npm install
+npm run tauri dev
+
+# Para instalar aliases no terminal:
+.\scripts\install-aliases.ps1
 ```
-<<<<<<< HEAD
 
 ---
 
-## Primeiras metas
+## Slogan
 
-### Fase 1 — Constituição
-
-- Definir arquitetura.
-- Definir regras para contribuição de IA.
-- Definir segurança.
-- Definir formato oficial de skill.
-- Definir roadmap técnico.
-
-### Fase 2 — Núcleo seguro
-
-- Criar Lya Keychain.
-- Trocar `apiKey` por `keyRef`.
-- Mover chamadas de LLM para Rust.
-- Criar Model Gateway.
-- Criar streaming.
-
-### Fase 3 — Workspace e agente
-
-- Abrir pasta de projeto.
-- Indexar arquivos.
-- Ler arquivos com segurança.
-- Mostrar diff.
-- Aplicar patch com aprovação.
-- Rodar comandos com confirmação.
-
----
-
-## Identidade
-
-O LyaCodex não é apenas uma refatoração.
-
-Ele é o motor que deve fazer o LyaCode evoluir de terminal com chat para um **ambiente de engenharia assistido por IA**.
-
-**Se você pensa, você executa. 
-                 Se você executa, você indexa. 
-				                  Se você indexa, você evolui.**
-=======
-
----
-
-## Primeiras metas
-
-### Fase 1 — Constituição
-
-- Definir arquitetura.
-- Definir regras para contribuição de IA.
-- Definir segurança.
-- Definir formato oficial de skill.
-- Definir roadmap técnico.
-
-### Fase 2 — Núcleo seguro
-
-- Criar Lya Keychain.
-- Trocar `apiKey` por `keyRef`.
-- Mover chamadas de LLM para Rust.
-- Criar Model Gateway.
-- Criar streaming.
-
-### Fase 3 — Workspace e agente
-
-- Abrir pasta de projeto.
-- Indexar arquivos.
-- Ler arquivos com segurança.
-- Mostrar diff.
-- Aplicar patch com aprovação.
-- Rodar comandos com confirmação.
-
----
-
-## Identidade
-
-O LyaCodex não é apenas uma refatoração.
-
-Ele é o motor que deve fazer o LyaCode evoluir de terminal com chat para um **ambiente de engenharia assistido por IA**.
-
-**Se você pensa, você executa. 
-                 Se você executa, você indexa. 
-				                  Se você indexa, você evolui.**
->>>>>>> 106f831 (Descrição das mudanças)
+Se voce pensa, voce executa.
+Se voce executa, voce indexa.
+Se voce indexa, voce evolui.

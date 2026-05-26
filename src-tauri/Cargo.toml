@@ -1,19 +1,19 @@
 [package]
-name = "lyacodex_desktop"
-version = "0.1.0"
-description = "LyaCodeX — Se você pensa, você executa. Agente de terminal com IA para programadores."
-authors = ["Luis Antonio Cardozo"]
-edition = "2021"
+name        = "lyacodex_desktop"
+version     = "0.1.0"
+description = "LyaCodeX — agente de terminal com IA para programadores. Se você pensa, você executa."
+authors     = ["Luis Antonio Cardozo"]
+edition     = "2021"
 
 [lib]
-name = "lyacodex_desktop_lib"
-crate-type = ["staticlib", "cdylib", "rlib"]
+name        = "lyacodex_desktop_lib"
+crate-type  = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = ["devtools"] }
+tauri              = { version = "2", features = ["devtools"] }
 tauri-plugin-opener = "2"
-clap = { version = "4", features = ["derive"] }
-lyacodex_ii_backend = { path = "../backend", features = ["tauri-commands"] }
+clap               = { version = "4", features = ["derive"] }
+lyacodex_backend   = { path = "../backend", features = ["tauri-commands"] }

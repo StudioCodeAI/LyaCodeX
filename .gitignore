@@ -1,0 +1,44 @@
+# ── Node ──────────────────────────────────────
+node_modules/
+dist/
+.cache/
+*.tsbuildinfo
+
+# ── Rust / Cargo ──────────────────────────────
+target/
+Cargo.lock
+**/*.rs.bk
+
+# ── Tauri ─────────────────────────────────────
+src-tauri/target/
+src-tauri/gen/
+WixTools/
+
+# ── Secrets — NUNCA subir ─────────────────────
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+vault.json
+**/vault.json
+lyacodex-browser-secrets*
+
+# ── Sistema ───────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editor ────────────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+*.suo
+*.user
+
+# ── Logs ──────────────────────────────────────
+*.log
+logs/
+
+# ── Subpasta fantasma (antiga duplicata) ──────
+LyaCodeX/

@@ -1,9 +1,13 @@
 import { ProviderDescriptor } from '../../../shared';
 
+// LyaCodeX — providers oficiais
+// lyacodex-trial removido: trial.lyacodex.ai ainda não existe.
+// Adicionar quando o servidor estiver hospedado.
+
 export const LYA_PROVIDERS: ProviderDescriptor[] = [
   {
     id: 'ollama',
-    name: 'Ollama',
+    name: 'Ollama (OpenAI GPT Local)',
     kind: 'local',
     defaultBaseUrl: 'http://localhost:11434/v1',
     requiresKeyRef: false,
@@ -20,12 +24,12 @@ export const LYA_PROVIDERS: ProviderDescriptor[] = [
     openAiCompatible: true,
   },
   {
-    id: 'lyacodex-trial',
-    name: 'LyaCodex GPT Trial',
+    id: 'openrouter',
+    name: 'OpenRouter',
     kind: 'cloud',
-    defaultBaseUrl: 'https://trial.lyacodex.ai/v1',
-    requiresKeyRef: false,
-    supportsStreaming: false,
+    defaultBaseUrl: 'https://openrouter.ai/api/v1',
+    requiresKeyRef: true,
+    supportsStreaming: true,
     openAiCompatible: true,
   },
   {
@@ -38,15 +42,6 @@ export const LYA_PROVIDERS: ProviderDescriptor[] = [
     openAiCompatible: true,
   },
   {
-    id: 'openrouter',
-    name: 'OpenRouter',
-    kind: 'cloud',
-    defaultBaseUrl: 'https://openrouter.ai/api/v1',
-    requiresKeyRef: true,
-    supportsStreaming: true,
-    openAiCompatible: true,
-  },
-  {
     id: 'gemini',
     name: 'Google Gemini',
     kind: 'cloud',
@@ -54,6 +49,15 @@ export const LYA_PROVIDERS: ProviderDescriptor[] = [
     requiresKeyRef: true,
     supportsStreaming: true,
     openAiCompatible: true,
+  },
+  {
+    id: 'anthropic',
+    name: 'Anthropic Claude',
+    kind: 'cloud',
+    defaultBaseUrl: 'https://api.anthropic.com/v1',
+    requiresKeyRef: true,
+    supportsStreaming: true,
+    openAiCompatible: false,
   },
   {
     id: 'groq',
@@ -75,5 +79,5 @@ export const LYA_PROVIDERS: ProviderDescriptor[] = [
 ];
 
 export function getProvider(providerId: string) {
-  return LYA_PROVIDERS.find((provider) => provider.id === providerId);
+  return LYA_PROVIDERS.find((p) => p.id === providerId);
 }
